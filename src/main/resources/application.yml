@@ -1,0 +1,22 @@
+server:
+  port: 9090
+logging:
+  level.org.springframework:
+    security: DEBUG
+    web.client: DEBUG
+  pattern.console: '%d{HH:mm:ss} %-10.35logger{45} - %msg%n'
+
+spring.security.oauth2.client:
+  provider:
+    google:
+      issuer-uri: 'https://accounts.google.com'
+  registration:
+    google:
+      authorization-grant-type: authorization_code
+      client-id: 667245185808-eidr4niin7iljscplh8m8ta4empm66v5.apps.googleusercontent.com
+      client-secret: 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
+      scope: openid,profile,email
+      redirect-uri: 'http://localhost:9090${google.login_process_path}'
+
+google.logout_url: 'https://accounts.google.com/logout?redirectURL=http://localhost:9090/login'
+google.login_process_path: '/process-login'

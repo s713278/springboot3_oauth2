@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Spring Security Demo</title>
+</head>
+
+<body>
+	<div th:if="${user != null}">
+		<h1>After Single Sign-On logged in as: 
+			<span th:text=" ${user.claims.name}" style="color: blue"/>
+		</h1>
+		<b>Loggedin Profile Info</b>
+			<table border="1">
+			<thead>
+				<tr>
+					<th>Claim Key</th>
+					<th>Value</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>IDToken</td>
+					<td th:text=${user.idToken.tokenValue}></td>
+				</tr>
+				<tr th:each="entry, stats : ${user.claims}" th:with="value=${entry.value}">
+					<td th:text="${entry.key}"></td>
+					<td th:text="${value}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+
+	<div th:if="${user == null}">
+		<h1>Anonymous user and No User LoggedIn</h1>
+		<h1><a href="/secured">Login with OpenID Provider</a></h1>
+	</div>
+	<h1><a href="/logout">Logout</a></h1>
+</body>
+
+</html>
